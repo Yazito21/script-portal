@@ -13,11 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: {
-    default: "Lifewood Recording Scripts",
-    template: "%s | Lifewood Recording"
-  },
-  description: "Lifewood multilingual speech recording portal",
+  title: "Lifewood Recording Scripts",
+  description: "Lifewood multilingual speech recording portal.",
 };
 
 export default function RootLayout({

@@ -88,6 +88,7 @@ export default function Home() {
       return
     }
   
+    type Language = "Malay" | "English" | "Mandarin" | "Cantonese"
     const ids = language ? speakerMap[language as Language] : []
   
     setAvailableSpeakers(ids)

@@ -162,7 +162,12 @@ export default function Home() {
             You may change some words and sentences, or add filler sounds (e.g.: "umm", "hmm", "lah", etc.) as long as they sound natural. 
             You may change the names in your lines to your own name. 
             Don’t pause for too long between your lines in the scripts. 0.5–1 second is enough. 
-            If you make a mistake (e.g.: mispronounce a word, etc.), just continue with the script. DO NOT end the call. 
+            If you make a mistake (e.g.: mispronounce a word, etc.), just continue with the script. DO NOT end the call.
+          </p> 
+          <p className="mb-4"> 
+            YOU ONLY NEED TO RECORD A TOTAL OF 45-50 MINUTES PER LANGUAGE. 
+            If you already reached that range, you can stop recording and ignore the remaining scripts.
+            If you don't have enough scripts to reach the target range, please notify us.
           </p> 
           <p> 
             <strong> Select the language you want to record and select or enter your ID to see your scripts. </strong> 

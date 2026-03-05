@@ -16,6 +16,8 @@ const tableMap: { [key: string]: string } = {
   Cantonese: "Cantonese_Scripts"
 }
 
+type Language = "Malay" | "English" | "Mandarin" | "Cantonese"
+
 const speakerMap: Record<Language, string[]> = {
 
   Mandarin: [
@@ -86,7 +88,6 @@ export default function Home() {
       return
     }
   
-    type Language = "Malay" | "English" | "Mandarin" | "Cantonese"
     const ids = language ? speakerMap[language as Language] : []
   
     setAvailableSpeakers(ids)

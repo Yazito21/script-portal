@@ -177,7 +177,7 @@ export default function Home() {
           {/* Language */}
           <select
             value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={(e) => setLanguage(e.target.value as Language)}
             className="border border-gray-300 bg-white text-black p-3 rounded-lg"
           >
             <option value="">Select Language</option>

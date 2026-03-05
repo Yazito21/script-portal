@@ -16,7 +16,7 @@ const tableMap: { [key: string]: string } = {
   Cantonese: "Cantonese_Scripts"
 }
 
-const speakerMap = {
+const speakerMap: Record<Language, string[]> = {
 
   Mandarin: [
 "#000101","#000102","#000103","#000104","#000105","#000106","#000107","#000108","#000109","#000110",
@@ -70,7 +70,7 @@ const speakerMap = {
 }
 
 export default function Home() {
-  const [language, setLanguage] = useState("")
+  const [language, setLanguage] = useState<Language | "">("")
   const [speaker, setSpeaker] = useState("")
   const [availableSpeakers, setAvailableSpeakers] = useState<string[]>([])
   const [scripts, setScripts] = useState<any[]>([])
@@ -86,7 +86,8 @@ export default function Home() {
       return
     }
   
-    const ids = speakerMap[language] || []
+    type Language = "Malay" | "English" | "Mandarin" | "Cantonese"
+    const ids = language ? speakerMap[language as Language] : []
   
     setAvailableSpeakers(ids)
   

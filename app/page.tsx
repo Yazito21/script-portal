@@ -168,6 +168,7 @@ export default function Home() {
             Please record a total of 45–50 minutes for each language. 
             Once you've reached this range, you may stop recording and disregard any remaining scripts.
             If the provided scripts are insufficient to reach the target duration, please inform us.
+            <strong> Please understand the guide before recording. </strong>
           </p> 
           <p> 
             <strong> Select the language you want to record and select or enter your ID to see your scripts. </strong> 

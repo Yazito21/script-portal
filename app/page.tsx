@@ -10,10 +10,10 @@ const supabase = createClient(
 
 // 🔹 Map language to Supabase table
 const tableMap: { [key: string]: string } = {
-  Malay: "Malay_Scripts",
-  English: "English_Scripts",
-  Mandarin: "Mandarin_Scripts",
-  Cantonese: "Cantonese_Scripts"
+  Malay: "malay_scripts",
+  English: "english_scripts",
+  Mandarin: "mandarin_scripts",
+  Cantonese: "cantonese_scripts"
 }
 
 type Language = "Malay" | "English" | "Mandarin" | "Cantonese"

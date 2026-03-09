@@ -170,7 +170,7 @@ export default function Home() {
             If the provided scripts are insufficient to reach the target duration, please inform us.
           </p> 
           <p> 
-            <strong> Please understand the guide before recording. Ask us if you have any questions. </strong> 
+            <strong> PLEASE UNDERSTAND THE GUIDE BEFORE RECORDING. ASK US IF YOU HAVE ANY QUESTIONS. FILL IN THE SPREADSHEET AFTER YOU FINISH RECORDING EACH SCRIPT. </strong> 
           </p> 
           <p> 
             <strong> Select the language you want to record and select or enter your ID to see your scripts. </strong> 

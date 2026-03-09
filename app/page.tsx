@@ -175,10 +175,7 @@ export default function Home() {
           <p> 
             <strong> FILL IN THE SPREADSHEET AFTER YOU FINISH RECORDING EACH SCRIPT. </strong> 
           </p> 
-          <p> 
-            
-          </p> 
-          <p> 
+          <p className="mb-4"> 
             Select the language you want to record and select or enter your ID to see your scripts.
           </p> 
         </div>

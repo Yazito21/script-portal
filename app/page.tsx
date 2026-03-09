@@ -172,10 +172,10 @@ export default function Home() {
           <p> 
             <strong> PLEASE UNDERSTAND THE GUIDE BEFORE RECORDING. ASK US IF YOU HAVE ANY QUESTIONS. </strong> 
           </p> 
-          <p> 
+          <p className="mb-4"> 
             <strong> FILL IN THE SPREADSHEET AFTER YOU FINISH RECORDING EACH SCRIPT. </strong> 
           </p> 
-          <p className="mb-4"> 
+          <p> 
             Select the language you want to record and select or enter your ID to see your scripts.
           </p> 
         </div>

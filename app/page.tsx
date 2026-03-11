@@ -161,23 +161,9 @@ export default function Home() {
         {/* Instructions */}
         <div className="bg-[#F9FAF7] border border-gray-200 p-6 rounded-xl mb-8 text-sm leading-relaxed text-center text-black"> 
           <p className="mb-4"> 
-            After calling the provided number, make sure you enter your ID correctly and then you can start speaking. 
-            Talk naturally. Take your time to get used to the scripts. You are free to improvise and adjust the scripts. 
-            You may change some words and sentences, or add filler sounds (e.g.: "umm", "hmm", "lah", etc.) as long as they sound natural. 
-            You may change the names in your lines to your own name. 
-            Don’t pause for too long between your lines in the scripts. 0.5–1 second is enough. 
-            If you make a mistake (e.g.: mispronounce a word, etc.), just continue with the script. Do not end the call.
-          </p> 
-          <p className="mb-4"> 
-            Please record a total of 45–50 minutes for each language. 
-            Once you've reached this range, you may stop recording and disregard any remaining scripts.
-            If the provided scripts are insufficient to reach the target duration, please inform us.
-          </p> 
-          <p> 
-            <strong> PLEASE UNDERSTAND THE GUIDE BEFORE RECORDING. ASK US IF YOU HAVE ANY QUESTIONS. </strong> 
-          </p> 
-          <p className="mb-4"> 
-            <strong> FILL IN THE SPREADSHEET AFTER YOU FINISH RECORDING EACH SCRIPT. </strong> 
+            NOTICE: WE ARE UPDATING THE SCRIPTS TO A NEW SET OF SCRIPTS. 
+            IF YOU HAVE NOT RECORDED YET, WE WILL CONTACT YOU ONCE WE HAVE ASSIGNED YOU YOUR NEW SET OF SCRIPTS. 
+            THANK YOU FOR YOU PATIENCE.
           </p> 
           <p> 
             Select the language you want to record and select or enter your ID to see your scripts.

@@ -162,11 +162,12 @@ export default function Home() {
         <div className="bg-[#F9FAF7] border border-gray-200 p-6 rounded-xl mb-8 text-sm leading-relaxed text-center text-black"> 
           <p className="mb-4"> 
           Before calling, make sure you’re prepared to record. Take your time to get used to the script. After you’re ready, then you can start recording.
-          To start recording, you need to call this number: <strong>00 852 3848 3261</strong>
           </p>
+
           <p className="mb-4"> 
           <strong>To start recording, you need to call this number: 00 852 3848 3261</strong>
           </p>
+
           <p className="mb-4"> 
           Once you’ve called the number, the enter your ID and then add a “#” at the end. 
           Then, you can start reading the lines in your script. 
@@ -174,10 +175,13 @@ export default function Home() {
           You may add filler words or sounds like “lah”, “umm”, “ohh”, “hmm”, etc. 
           Don’t pause for too long between your lines in the scripts. 0.5-1 second is enough. 
           After you’ve finished recording, end the call. Take note of the date, time, and duration of the call.
+          Here is the full guide: https://drive.google.com/file/d/1ojMWDPZOuXv2wSstUT6XgaAzupgJK5Br/view?usp=sharing
           </p>
-          <p>
-          After you’ve finished recording a script, you need to enter the recording data into this spreadsheet: https://docs.google.com/spreadsheets/d/1V41VNnYqZgkPchcFPmyomH1AKlWOSEEn7mrUjmTjpO0/edit?usp=sharing 
-          </p> 
+
+          <p className="mb-4">
+          After you’ve finished recording a script, you need to enter the recording data into this spreadsheet: https://docs.google.com/spreadsheets/d/1V41VNnYqZgkPchcFPmyomH1AKlWOSEEn7mrUjmTjpO0/edit?usp=sharing
+          </p>
+
           <p>
           <strong>Select the language you want to record and select or enter your ID to see your scripts.</strong>
           </p> 

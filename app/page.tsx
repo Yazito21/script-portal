@@ -175,7 +175,15 @@ export default function Home() {
           You may add filler words or sounds like “lah”, “umm”, “ohh”, “hmm”, etc. 
           Don’t pause for too long between your lines in the scripts. 0.5-1 second is enough. 
           After you’ve finished recording, end the call. Take note of the date, time, and duration of the call.
-          Here is the full guide: https://drive.google.com/file/d/1ojMWDPZOuXv2wSstUT6XgaAzupgJK5Br/view?usp=sharing
+          Here is the full guide containing the recording procedure:
+          </p>
+
+          <p className="mb-4"> 
+          <strong>Here is the full guide containing the recording procedure: https://drive.google.com/file/d/1ojMWDPZOuXv2wSstUT6XgaAzupgJK5Br/view?usp=sharing</strong>
+          </p>
+
+          <p className="mb-4"> 
+          <strong>For Cantonese, the recording procedure is slightly different. Here's the guide for Cantonese: https://docs.google.com/document/d/1tFZBQog995CHcSnS7jy-bsnK7mXSm8n8RUVOtxtjXrU/edit?usp=sharing</strong>
           </p>
 
           <p className="mb-4">

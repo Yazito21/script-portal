@@ -298,9 +298,21 @@ export default function Home() {
                 {lines.map((line: string, i: number) => (
                   <div
                     key={i}
-                    className="border-t border-b border-gray-300 py-3 text-left"
+                    className="flex items-center justify-between border-t border-gray-300 py-3"
                   >
-                    {line}
+                    <span className="pr-4">{line}</span>
+
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 accent-[#0F5B3C]"
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          e.target.parentElement?.classList.add("opacity-50")
+                        } else {
+                          e.target.parentElement?.classList.remove("opacity-50")
+                        }
+                      }}
+                    />
                   </div>
                 ))}
               </div>

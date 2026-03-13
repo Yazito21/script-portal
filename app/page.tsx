@@ -179,15 +179,39 @@ export default function Home() {
           </p>
 
           <p className="mb-4"> 
-          <strong>Here is the full guide containing the recording procedure: https://drive.google.com/file/d/1ojMWDPZOuXv2wSstUT6XgaAzupgJK5Br/view?usp=sharing</strong>
+          <strong>Here is the full guide containing the recording procedure:</strong>
+          <a
+            href="https://drive.google.com/file/d/1ojMWDPZOuXv2wSstUT6XgaAzupgJK5Br/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0F5B3C] underline hover:text-[#0c4a31]"
+          >
+            General Recording Procedure
+          </a>
           </p>
 
           <p className="mb-4"> 
-          <strong>For Cantonese, the recording procedure is slightly different. Here's the guide for Cantonese: https://docs.google.com/document/d/1tFZBQog995CHcSnS7jy-bsnK7mXSm8n8RUVOtxtjXrU/edit?usp=sharing</strong>
+          <strong>For Cantonese, the recording procedure is slightly different. Here's the guide for Cantonese:</strong>
+          <a
+            href="https://docs.google.com/document/d/1tFZBQog995CHcSnS7jy-bsnK7mXSm8n8RUVOtxtjXrU/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0F5B3C] underline hover:text-[#0c4a31]"
+          >
+            Recording Procedure for Cantonese
+          </a>
           </p>
 
           <p className="mb-4">
-          After you’ve finished recording a script, you need to enter the recording data into this spreadsheet: https://docs.google.com/spreadsheets/d/1V41VNnYqZgkPchcFPmyomH1AKlWOSEEn7mrUjmTjpO0/edit?usp=sharing
+          <strong>After you’ve finished recording a script, you need to enter the recording data into this spreadsheet:</strong>
+          <a
+            href="https://docs.google.com/spreadsheets/d/1V41VNnYqZgkPchcFPmyomH1AKlWOSEEn7mrUjmTjpO0/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0F5B3C] underline hover:text-[#0c4a31]"
+          >
+            Recording Data Spreadsheet
+          </a>
           </p>
 
           <p>

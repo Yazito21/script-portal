@@ -92,15 +92,15 @@ export default function Home() {
       setAvailableSpeakers([])
       return
     }
-  
+
     type Language = "Malay" | "English" | "Mandarin" | "Cantonese"
     const ids = language ? speakerMap[language as Language] : []
-  
+
     setAvailableSpeakers(ids)
-  
+
     setSpeaker("")
     setScripts([])
-  
+
   }, [language])
 
   // 🔹 Load Saved Progress From localStorage
@@ -154,23 +154,6 @@ export default function Home() {
     return acc
   }, {})
 
-  const scriptProgress = Object.entries(groupedScripts).map(([key, lines]: any) => {
-    const total = lines.length
-  
-    let completed = 0
-  
-    lines.forEach((_: string, i: number) => {
-      const lineKey = `${key}-${i}`
-      if (checkedLines[lineKey]) completed++
-    })
-  
-    return {
-      script: key,
-      completed,
-      total
-    }
-  })
-
   const toggleSection = (key: string) => {
     setOpenSections(prev => ({
       ...prev,
@@ -178,19 +161,24 @@ export default function Home() {
     }))
   }
 
-  const openScript = (key: string) => {
-    setOpenSections(prev => ({
-      ...prev,
-      [key]: true
-    }))
-  
-    setTimeout(() => {
-      const element = document.getElementById(`script-${key}`)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" })
-      }
-    }, 100)
-  }
+  // 🔹 Calculate progress for summary table
+  const progressData = Object.entries(groupedScripts).map(([key, lines]: any) => {
+
+    const total = lines.length
+
+    let completed = 0
+
+    lines.forEach((_: any, i: number) => {
+      const lineKey = `${key}-${i}`
+      if (checkedLines[lineKey]) completed++
+    })
+
+    return {
+      name: key,
+      completed,
+      total
+    }
+  })
 
   return (
     <div className="min-h-screen bg-[#F5EBDC] flex flex-col items-center p-8 text-black">
@@ -266,7 +254,7 @@ export default function Home() {
 
         <div className="max-w-4xl mx-auto">
 
-        {/* Row 1: Inputs */}
+        {/* Inputs */}
         <div className="grid grid-cols-3 gap-4 mb-4">
 
           <select
@@ -308,7 +296,7 @@ export default function Home() {
 
         </div>
 
-        {/* Row 2: Button */}
+        {/* Button */}
         <div className="w-full mb-8">
           <button
             onClick={fetchScripts}
@@ -318,86 +306,66 @@ export default function Home() {
           </button>
         </div>
 
-      </div>
-
-      {/* SCRIPT PROGRESS TABLE */}
-
-      {Object.keys(groupedScripts).length > 0 && (
-        <div className="mb-10 overflow-hidden rounded-lg border border-gray-300">
-
-          <table className="w-full text-left">
-
-            <thead className="bg-[#0F5B3C] text-white">
-              <tr>
-                <th className="px-6 py-3">Script</th>
-                <th className="px-6 py-3 w-40 text-center">Progress</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              {Object.entries(groupedScripts).map(([key, lines]: any, index) => {
-
-                let completed = 0
-
-                lines.forEach((_: string, i: number) => {
-                  const lineKey = `${key}-${i}`
-                  if (checkedLines[lineKey]) completed++
-                })
-
-                const total = lines.length
-                const percent = completed / total
-
-                let color = "bg-red-100"
-
-                if (percent === 1) color = "bg-green-100"
-                else if (percent > 0) color = "bg-yellow-100"
-
-                return (
-                  <tr key={index} className="border-t">
-
-                    <td
-                      onClick={() => openScript(key)}
-                      className="px-6 py-3 cursor-pointer text-[#0F5B3C] hover:underline font-semibold"
-                    >
-                      {key}
-                    </td>
-
-                    <td className={`px-6 py-3 text-center font-semibold ${color}`}>
-                      {completed} / {total}
-                    </td>
-
-                  </tr>
-                )
-
-              })}
-
-            </tbody>
-
-          </table>
-
         </div>
-      )}
 
-      {Object.keys(groupedScripts).length === 0 && !loading && (
-        <p className="text-center">No scripts found.</p>
-      )}
+        {/* 🔹 SCRIPT PROGRESS TABLE */}
+        {progressData.length > 0 && (
+          <div className="mb-10">
 
-      {Object.entries(groupedScripts).map(([key, lines]: any, index) => (
-        <div id={`script-${key}`} key={index} className="mb-8">
+            <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
 
-          <div
-            onClick={() => toggleSection(key)}
-            className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between"
-          >
-            <span>{key}</span>
-            <span>{openSections[key] ? "−" : "+"}</span>
+              <thead className="bg-[#0F5B3C] text-white">
+                <tr>
+                  <th className="text-left px-6 py-3">Script</th>
+                  <th className="text-center px-6 py-3">Progress</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                {progressData.map((script, i) => {
+
+                  let bg = "bg-red-200"
+
+                  if (script.completed === script.total) bg = "bg-green-200"
+                  else if (script.completed > 0) bg = "bg-yellow-200"
+
+                  return (
+                    <tr key={i} className="border-t border-gray-300">
+
+                      <td className="px-6 py-3">
+                        {script.name}
+                      </td>
+
+                      <td className={`px-6 py-3 text-center font-semibold ${bg}`}>
+                        {script.completed} / {script.total}
+                      </td>
+
+                    </tr>
+                  )
+                })}
+
+              </tbody>
+
+            </table>
+
           </div>
+        )}
 
-          {openSections[key] && (
-            <div className="mt-4 bg-[#F9FAF7] p-6 rounded-lg">
+        {Object.entries(groupedScripts).map(([key, lines]: any, index) => (
+          <div key={index} className="mb-8">
 
-              {lines.map((line: string, i: number) => {
+            <div
+              onClick={() => toggleSection(key)}
+              className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between"
+            >
+              <span>{key}</span>
+              <span>{openSections[key] ? "−" : "+"}</span>
+            </div>
+
+            {openSections[key] && (
+              <div className="mt-4 bg-[#F9FAF7] p-6 rounded-lg">
+                {lines.map((line: string, i: number) => {
 
                 const lineKey = `${key}-${i}`
 
@@ -423,18 +391,14 @@ export default function Home() {
                     />
                   </div>
                 )
+                })}
+              </div>
+            )}
 
-              })}
+          </div>
+        ))}
 
-            </div>
-          )}
-
-        </div>
-      ))}
+      </div>
     </div>
-
-  </div>
-
-</div>
-
+  )
 }

@@ -83,6 +83,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({})
   const [typedID, setTypedID] = useState("")
+  const [checkedLines, setCheckedLines] = useState<{ [key: string]: boolean }>({})
 
   // 🔹 Get available speakers
   useEffect(() => {
@@ -101,6 +102,19 @@ export default function Home() {
     setScripts([])
   
   }, [language])
+
+  // 🔹 Load Saved Progress From localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("recordingProgress")
+    if (saved) {
+      setCheckedLines(JSON.parse(saved))
+    }
+  }, [])
+
+  // 🔹 Save Progress Whenever It Changes
+  useEffect(() => {
+    localStorage.setItem("recordingProgress", JSON.stringify(checkedLines))
+  }, [checkedLines])
 
   // 🔹 Fetch scripts for selected speaker
   const fetchScripts = async () => {
@@ -295,26 +309,33 @@ export default function Home() {
 
             {openSections[key] && (
               <div className="mt-4 bg-[#F9FAF7] p-6 rounded-lg">
-                {lines.map((line: string, i: number) => (
+                {lines.map((line: string, i: number) => {
+
+                const lineKey = `${key}-${i}`
+
+                return (
                   <div
                     key={i}
-                    className="flex items-center justify-between border-t border-gray-300 py-3"
+                    className={`flex items-center justify-between border-t border-gray-300 py-3 ${
+                      checkedLines[lineKey] ? "opacity-50" : ""
+                    }`}
                   >
                     <span className="pr-4">{line}</span>
 
                     <input
                       type="checkbox"
+                      checked={checkedLines[lineKey] || false}
+                      onChange={() =>
+                        setCheckedLines(prev => ({
+                          ...prev,
+                          [lineKey]: !prev[lineKey]
+                        }))
+                      }
                       className="w-4 h-4 accent-[#0F5B3C]"
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          e.target.parentElement?.classList.add("opacity-50")
-                        } else {
-                          e.target.parentElement?.classList.remove("opacity-50")
-                        }
-                      }}
                     />
                   </div>
-                ))}
+                )
+                })}
               </div>
             )}
 

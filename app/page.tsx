@@ -81,6 +81,7 @@ export default function Home() {
   const [availableSpeakers, setAvailableSpeakers] = useState<string[]>([])
   const [scripts, setScripts] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
+  const [openProgress, setOpenProgress] = useState(true)
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({})
   const [typedID, setTypedID] = useState("")
   const [checkedLines, setCheckedLines] = useState<{ [key: string]: boolean }>({})
@@ -159,6 +160,26 @@ export default function Home() {
       ...prev,
       [key]: !prev[key]
     }))
+  }
+
+  const goToScript = (key: string) => {
+
+    // open the section
+    setOpenSections(prev => ({
+      ...prev,
+      [key]: true
+    }))
+  
+    // scroll after render
+    setTimeout(() => {
+      const element = document.getElementById(`script-${key}`)
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        })
+      }
+    }, 100)
   }
 
   // 🔹 Calculate progress for summary table
@@ -309,8 +330,20 @@ export default function Home() {
         </div>
 
         {/* 🔹 SCRIPT PROGRESS TABLE */}
+
         {progressData.length > 0 && (
-          <div className="mb-10">
+
+        <div className="mb-10">
+
+          <div
+            onClick={() => setOpenProgress(!openProgress)}
+            className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between mb-2"
+          >
+            <span>Script Progress</span>
+            <span>{openProgress ? "−" : "+"}</span>
+          </div>
+
+          {openProgress && (
 
             <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
 
@@ -333,7 +366,10 @@ export default function Home() {
                   return (
                     <tr key={i} className="border-t border-gray-300">
 
-                      <td className="px-6 py-3">
+                      <td
+                        className="px-6 py-3 cursor-pointer hover:underline"
+                        onClick={() => goToScript(script.name)}
+                      >
                         {script.name}
                       </td>
 
@@ -349,11 +385,14 @@ export default function Home() {
 
             </table>
 
-          </div>
+          )}
+
+        </div>
+
         )}
 
         {Object.entries(groupedScripts).map(([key, lines]: any, index) => (
-          <div key={index} className="mb-8">
+          <div id={`script-${key}`} key={index} className="mb-8">
 
             <div
               onClick={() => toggleSection(key)}

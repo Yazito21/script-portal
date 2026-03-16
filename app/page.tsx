@@ -154,11 +154,42 @@ export default function Home() {
     return acc
   }, {})
 
+  const scriptProgress = Object.entries(groupedScripts).map(([key, lines]: any) => {
+    const total = lines.length
+  
+    let completed = 0
+  
+    lines.forEach((_: string, i: number) => {
+      const lineKey = `${key}-${i}`
+      if (checkedLines[lineKey]) completed++
+    })
+  
+    return {
+      script: key,
+      completed,
+      total
+    }
+  })
+
   const toggleSection = (key: string) => {
     setOpenSections(prev => ({
       ...prev,
       [key]: !prev[key]
     }))
+  }
+
+  const openScript = (key: string) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [key]: true
+    }))
+  
+    setTimeout(() => {
+      const element = document.getElementById(`script-${key}`)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    }, 100)
   }
 
   return (
@@ -238,7 +269,6 @@ export default function Home() {
         {/* Row 1: Inputs */}
         <div className="grid grid-cols-3 gap-4 mb-4">
 
-          {/* Language */}
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value as Language)}
@@ -251,7 +281,6 @@ export default function Home() {
             <option value="Cantonese">Cantonese</option>
           </select>
 
-          {/* Select ID */}
           <select
             value={speaker}
             onChange={(e) => setSpeaker(e.target.value)}
@@ -265,7 +294,6 @@ export default function Home() {
             ))}
           </select>
 
-          {/* Type ID */}
           <input
             type="text"
             placeholder="Or type your ID (e.g. 000123)"
@@ -290,26 +318,86 @@ export default function Home() {
           </button>
         </div>
 
+      </div>
+
+      {/* SCRIPT PROGRESS TABLE */}
+
+      {Object.keys(groupedScripts).length > 0 && (
+        <div className="mb-10 overflow-hidden rounded-lg border border-gray-300">
+
+          <table className="w-full text-left">
+
+            <thead className="bg-[#0F5B3C] text-white">
+              <tr>
+                <th className="px-6 py-3">Script</th>
+                <th className="px-6 py-3 w-40 text-center">Progress</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {Object.entries(groupedScripts).map(([key, lines]: any, index) => {
+
+                let completed = 0
+
+                lines.forEach((_: string, i: number) => {
+                  const lineKey = `${key}-${i}`
+                  if (checkedLines[lineKey]) completed++
+                })
+
+                const total = lines.length
+                const percent = completed / total
+
+                let color = "bg-red-100"
+
+                if (percent === 1) color = "bg-green-100"
+                else if (percent > 0) color = "bg-yellow-100"
+
+                return (
+                  <tr key={index} className="border-t">
+
+                    <td
+                      onClick={() => openScript(key)}
+                      className="px-6 py-3 cursor-pointer text-[#0F5B3C] hover:underline font-semibold"
+                    >
+                      {key}
+                    </td>
+
+                    <td className={`px-6 py-3 text-center font-semibold ${color}`}>
+                      {completed} / {total}
+                    </td>
+
+                  </tr>
+                )
+
+              })}
+
+            </tbody>
+
+          </table>
+
         </div>
+      )}
 
-        {Object.keys(groupedScripts).length === 0 && !loading && (
-          <p className="text-center">No scripts found.</p>
-        )}
+      {Object.keys(groupedScripts).length === 0 && !loading && (
+        <p className="text-center">No scripts found.</p>
+      )}
 
-        {Object.entries(groupedScripts).map(([key, lines]: any, index) => (
-          <div key={index} className="mb-8">
+      {Object.entries(groupedScripts).map(([key, lines]: any, index) => (
+        <div id={`script-${key}`} key={index} className="mb-8">
 
-            <div
-              onClick={() => toggleSection(key)}
-              className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between"
-            >
-              <span>{key}</span>
-              <span>{openSections[key] ? "−" : "+"}</span>
-            </div>
+          <div
+            onClick={() => toggleSection(key)}
+            className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between"
+          >
+            <span>{key}</span>
+            <span>{openSections[key] ? "−" : "+"}</span>
+          </div>
 
-            {openSections[key] && (
-              <div className="mt-4 bg-[#F9FAF7] p-6 rounded-lg">
-                {lines.map((line: string, i: number) => {
+          {openSections[key] && (
+            <div className="mt-4 bg-[#F9FAF7] p-6 rounded-lg">
+
+              {lines.map((line: string, i: number) => {
 
                 const lineKey = `${key}-${i}`
 
@@ -335,14 +423,15 @@ export default function Home() {
                     />
                   </div>
                 )
-                })}
-              </div>
-            )}
 
-          </div>
-        ))}
+              })}
 
-      </div>
+            </div>
+          )}
+
+        </div>
+      ))}
+
     </div>
-  )
-}
+  </div>
+)

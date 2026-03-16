@@ -155,6 +155,31 @@ export default function Home() {
     return acc
   }, {})
 
+  const scriptKeys = Object.keys(groupedScripts)
+
+  const isScriptComplete = (key: string) => {
+
+    const lines = groupedScripts[key]
+  
+    for (let i = 0; i < lines.length; i++) {
+      const lineKey = `${key}-${i}`
+      if (!checkedLines[lineKey]) return false
+    }
+  
+    return true
+  }
+
+  const isScriptLocked = (key: string) => {
+
+    const index = scriptKeys.indexOf(key)
+  
+    if (index === 0) return false
+  
+    const previousScript = scriptKeys[index - 1]
+  
+    return !isScriptComplete(previousScript)
+  }
+
   const toggleSection = (key: string) => {
     setOpenSections(prev => ({
       ...prev,
@@ -458,6 +483,7 @@ export default function Home() {
 
                     <input
                       type="checkbox"
+                      disabled={isScriptLocked(key)}
                       checked={checkedLines[lineKey] || false}
                       onChange={() =>
                         setCheckedLines(prev => ({
@@ -465,7 +491,9 @@ export default function Home() {
                           [lineKey]: !prev[lineKey]
                         }))
                       }
-                      className="w-4 h-4 accent-[#0F5B3C]"
+                      className={`w-4 h-4 accent-[#0F5B3C] ${
+                        isScriptLocked(key) ? "opacity-40 cursor-not-allowed" : ""
+                      }`}
                     />
                   </div>
                 )

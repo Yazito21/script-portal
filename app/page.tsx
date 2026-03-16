@@ -335,10 +335,10 @@ export default function Home() {
 
         <div className="mb-10">
 
-          {/* Title */}
+          {/* Title Bar */}
           <div
             onClick={() => setOpenProgress(!openProgress)}
-            className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-t-lg font-semibold flex justify-between"
+            className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between"
           >
             <span>Recording Progress</span>
             <span>{openProgress ? "−" : "+"}</span>
@@ -346,60 +346,51 @@ export default function Home() {
 
           {openProgress && (
 
-            <div className="border border-gray-300 rounded-b-lg overflow-hidden">
+            <div className="mt-4 bg-[#F9FAF7] p-6 rounded-lg">
 
-              <table className="w-full">
+              {/* Header Row */}
+              <div className="flex justify-between font-semibold border-b border-gray-300 pb-3 mb-3">
+                <span>Script</span>
+                <span>Progress</span>
+              </div>
 
-                {/* Column Headers */}
-                <thead className="bg-[#0F5B3C] text-white">
-                  <tr>
-                    <th className="text-left px-6 py-3 border-r border-white">
-                      Script
-                    </th>
-                    <th className="text-center px-6 py-3">
-                      Progress
-                    </th>
-                  </tr>
-                </thead>
+              {progressData.map((script, i) => {
 
-                <tbody>
+                let bg = "bg-red-200"
 
-                  {progressData.map((script, i) => {
+                if (script.completed === script.total) bg = "bg-green-200"
+                else if (script.completed > 0) bg = "bg-yellow-200"
 
-                    let bg = "bg-red-200"
+                return (
 
-                    if (script.completed === script.total) bg = "bg-green-200"
-                    else if (script.completed > 0) bg = "bg-yellow-200"
+                  <div
+                    key={i}
+                    className="flex items-center justify-between border-t border-gray-300 py-3"
+                  >
 
-                    return (
-                      <tr key={i} className="border-t border-gray-300">
+                    {/* Script Name */}
+                    <span
+                      className="cursor-pointer hover:underline pr-4"
+                      onClick={() => goToScript(script.name)}
+                    >
+                      {script.name}
+                    </span>
 
-                        {/* Script Name */}
-                        <td
-                          className="px-6 py-3 border-r border-gray-300 cursor-pointer hover:underline"
-                          onClick={() => goToScript(script.name)}
-                        >
-                          {script.name}
-                        </td>
+                    {/* Progress */}
+                    <span className={`px-4 py-1 rounded font-semibold ${bg}`}>
+                      {script.completed} / {script.total}
+                    </span>
 
-                        {/* Progress */}
-                        <td className={`px-6 py-3 text-center font-semibold ${bg}`}>
-                          {script.completed} / {script.total}
-                        </td>
+                  </div>
 
-                      </tr>
-                    )
-                  })}
-
-                </tbody>
-
-              </table>
+                )
+              })}
 
             </div>
 
           )}
 
-          {/* Divider line under table */}
+          {/* Divider between table and scripts */}
           <div className="border-t-2 border-gray-300 mt-10"></div>
 
         </div>

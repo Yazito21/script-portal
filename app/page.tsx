@@ -329,63 +329,78 @@ export default function Home() {
 
         </div>
 
-        {/* 🔹 SCRIPT PROGRESS TABLE */}
+        {/* 🔹 RECORDING PROGRESS */}
 
         {progressData.length > 0 && (
 
         <div className="mb-10">
 
+          {/* Title */}
           <div
             onClick={() => setOpenProgress(!openProgress)}
-            className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between mb-2"
+            className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-t-lg font-semibold flex justify-between"
           >
-            <span>Script Progress</span>
+            <span>Recording Progress</span>
             <span>{openProgress ? "−" : "+"}</span>
           </div>
 
           {openProgress && (
 
-            <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
+            <div className="border border-gray-300 rounded-b-lg overflow-hidden">
 
-              <thead className="bg-[#0F5B3C] text-white">
-                <tr>
-                  <th className="text-left px-6 py-3">Script</th>
-                  <th className="text-center px-6 py-3">Progress</th>
-                </tr>
-              </thead>
+              <table className="w-full">
 
-              <tbody>
+                {/* Column Headers */}
+                <thead className="bg-[#0F5B3C] text-white">
+                  <tr>
+                    <th className="text-left px-6 py-3 border-r border-white">
+                      Script
+                    </th>
+                    <th className="text-center px-6 py-3">
+                      Progress
+                    </th>
+                  </tr>
+                </thead>
 
-                {progressData.map((script, i) => {
+                <tbody>
 
-                  let bg = "bg-red-200"
+                  {progressData.map((script, i) => {
 
-                  if (script.completed === script.total) bg = "bg-green-200"
-                  else if (script.completed > 0) bg = "bg-yellow-200"
+                    let bg = "bg-red-200"
 
-                  return (
-                    <tr key={i} className="border-t border-gray-300">
+                    if (script.completed === script.total) bg = "bg-green-200"
+                    else if (script.completed > 0) bg = "bg-yellow-200"
 
-                      <td
-                        className="px-6 py-3 cursor-pointer hover:underline"
-                        onClick={() => goToScript(script.name)}
-                      >
-                        {script.name}
-                      </td>
+                    return (
+                      <tr key={i} className="border-t border-gray-300">
 
-                      <td className={`px-6 py-3 text-center font-semibold ${bg}`}>
-                        {script.completed} / {script.total}
-                      </td>
+                        {/* Script Name */}
+                        <td
+                          className="px-6 py-3 border-r border-gray-300 cursor-pointer hover:underline"
+                          onClick={() => goToScript(script.name)}
+                        >
+                          {script.name}
+                        </td>
 
-                    </tr>
-                  )
-                })}
+                        {/* Progress */}
+                        <td className={`px-6 py-3 text-center font-semibold ${bg}`}>
+                          {script.completed} / {script.total}
+                        </td>
 
-              </tbody>
+                      </tr>
+                    )
+                  })}
 
-            </table>
+                </tbody>
+
+              </table>
+
+            </div>
 
           )}
+
+          {/* Divider line under table */}
+          <div className="border-t-2 border-gray-300 mt-10"></div>
 
         </div>
 

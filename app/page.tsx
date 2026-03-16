@@ -182,6 +182,19 @@ export default function Home() {
     }, 100)
   }
 
+  const goToProgress = () => {
+
+    const element = document.getElementById("progress-section")
+  
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      })
+    }
+  
+  }
+
   // 🔹 Calculate progress for summary table
   const progressData = Object.entries(groupedScripts).map(([key, lines]: any) => {
 
@@ -333,7 +346,7 @@ export default function Home() {
 
         {progressData.length > 0 && (
 
-        <div className="mb-10">
+        <div id="progress-section" className="mb-10">
 
           {/* Title Bar */}
           <div
@@ -401,11 +414,31 @@ export default function Home() {
           <div id={`script-${key}`} key={index} className="mb-8">
 
             <div
-              onClick={() => toggleSection(key)}
-              className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between"
+              className="cursor-pointer bg-[#0F5B3C] text-white px-6 py-3 rounded-lg font-semibold flex justify-between items-center"
             >
-              <span>{key}</span>
-              <span>{openSections[key] ? "−" : "+"}</span>
+
+              <span onClick={() => toggleSection(key)}>{key}</span>
+
+              <div className="flex items-center gap-4">
+
+                {/* Jump to Progress */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    goToProgress()
+                  }}
+                  className="hover:opacity-80"
+                >
+                  ↑
+                </button>
+
+                {/* Expand / Collapse */}
+                <span onClick={() => toggleSection(key)}>
+                  {openSections[key] ? "−" : "+"}
+                </span>
+
+              </div>
+
             </div>
 
             {openSections[key] && (
